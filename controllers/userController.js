@@ -1,19 +1,42 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../models/userModel.js';
+import mongoose from "mongoose";
 
+
+export const getUsers = async (req, res) => {
+  try {
+      const users = await User.find();
+     
+      res.status(200).json(users);
+  } catch (error) {
+      res.status(404).json({message: error.message})
+  }
+}
+
+export const getUser = async (req, res) => { 
+  const { id } = req.params;
+
+  try {
+      const user= await User.findById(id);
+      
+      res.status(200).json(user);
+  } catch (error) {
+      res.status(404).json({ message: error.message });
+  }
+}
 
 export const signin = async (req, res) => {
 
 const {email, password} = req.body;
 try{
-    const existingUser = await User.findOne({email});
+    const existingUser = await User.findOne({email})
     if(!existingUser) return res.status(404).json({ message: "Agent doesn't exist"})
    
     const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
     if(!isPasswordCorrect ) return res.status(404).json({ message: "Invalid credentials."});
     
-    const token = jwt.sign({ phone: existingUser.phone,  name: existingUser.name, apartmentNo: existingUser.apartmentNo, email: existingUser.email, id: existingUser._id}, 'test', { expiresIn: '5d' });
+    const token = jwt.sign({ phone: existingUser.phone, profilePicture: existingUser.profilePicture, name: existingUser.name, apartmentNo: existingUser.apartmentNo, email: existingUser.email, id: existingUser._id}, 'test', { expiresIn: '5d' });
     const refreshToken = jwt.sign({email: existingUser.email, role: existingUser.role}, 'test', { expiresIn: '5d' });
 
     res.cookie('jws', refreshToken, 
@@ -97,4 +120,13 @@ export const googleSignIn = async (req, res) => {
       res.status(500).json({ message: "Something went wrong" });
       console.log(error);
     }
-  };
+  }
+    export const deleteUser = async (req, res) => {
+      const {id} = req.params;
+      if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('no event with that id');
+  
+      await User.findByIdAndRemove(id);
+  
+      res.json({message: 'Event deleted successfully'});
+  
+    };
