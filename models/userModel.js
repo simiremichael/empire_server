@@ -13,7 +13,7 @@ const userSchema = new Schema({
     token: String,
     refreshToken: [String],
     googleId: String
-})
+});
 
 const User = mongoose.model('User', userSchema);
 

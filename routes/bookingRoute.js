@@ -4,7 +4,7 @@ import { getBookings, createBooking, updateBooking, deleteBooking, getBooking, g
 import userAuth from '../middleware/userAuth.js';
 
 //agentAuth,
-const bookingRoute = express.Router();
+const bookingRoute = express.Router()
 
 // propertyRoute.get('/search/:search', getPropertyBySearch);
 bookingRoute.get('/', getBookings);

@@ -10,7 +10,7 @@ const userAuth = async (req, res, next) => {
     }
 
     const token = authHeader.split(' ')[1]
-   console.log(token);
+   
       
     jwt.verify(
         token,
@@ -22,6 +22,7 @@ const userAuth = async (req, res, next) => {
             req.email = decoded?.email;
             req.apartmentNo = decoded?.apartmentNo;
             req.phone = decoded?.phone;
+            req.profilePicture = decoded?.profilePicture;
             next()
         })
 

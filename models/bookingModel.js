@@ -15,7 +15,7 @@ const bookingSchema = new Schema({
     profilePicture: String,
     apartmentNo: String,
     creator: String,
-})
+});
 
 const Booking = mongoose.model('Booking', bookingSchema);
 

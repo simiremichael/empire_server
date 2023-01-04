@@ -1,14 +1,13 @@
 {
-  "name": "backend",
+  "name": "empire_server",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js"
   },
-  "author": "",
+  "author": "michael simire",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -30,5 +29,14 @@
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.14",
     "@types/jsonwebtoken": "^8.5.9"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simiremichael/empire_server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/simiremichael/empire_server/issues"
+  },
+  "homepage": "https://github.com/simiremichael/empire_server#readme",
+  "description": ""
 }
