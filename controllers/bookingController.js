@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import express from 'express';
 import Booking from "../models/bookingModel.js";
+import sendEmail from '../utils/sendEmail.js';
 
 const router = express.Router();
 
@@ -70,7 +71,15 @@ export const createBooking = async (req, res) => {
 
         await newBooking.save();
         res.status(201).json(newBooking);
-   
+        
+        const send_to =  'simiremichael@gmail.com';
+        const send_from = process.env.USER_EMAIL;
+        const subject = 'booked succesfully';
+        const message = `
+         <h3>Empire Court Lifestyle Booking System.</h3>
+        <p>${req.apartmentNo} has successfully booked ${select} between ${startTime} ${startDate} and ${endTime} ${endDate}</p>
+        `
+        await sendEmail(subject, message, send_to, send_from);
     } catch (error) {
         res.status(409).json({ message: error.message });
     }
