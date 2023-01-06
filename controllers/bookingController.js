@@ -72,7 +72,7 @@ export const createBooking = async (req, res) => {
         await newBooking.save();
         res.status(201).json(newBooking);
         
-        const send_to =  'simiremichael@gmail.com';
+        const send_to =  'ademola.azeez@tfcameroncourt.com';
         const send_from = process.env.USER_EMAIL;
         const subject = 'booked succesfully';
         const message = `
