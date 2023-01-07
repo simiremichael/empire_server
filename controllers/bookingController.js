@@ -20,7 +20,6 @@ export const getBookingBySearch = async (req, res) => {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
   const search = new RegExp(req.params?.search, 'i');
   //const search  = req.params;
-   console.log(search);
 
   //if(req.params.location) {
    if(search !== '') {
