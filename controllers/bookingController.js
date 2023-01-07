@@ -67,12 +67,12 @@ export const createBooking = async (req, res) => {
         const existingBookings = await Booking.find({startDate})
     //  if(existingBookings) return res.status(404).json({ message: "data and time unavailable"});
      
-    const newBooking = new Booking({ creator: req.userId, startDate, startTime, endDate, endTime, select, name: req.name, phone: req.phone, email: req.email, id, profilePicture: req.profilePicture, apartmentNo: req.apartmentNo, createdAt: new Date().toLocaleString()})
+    const newBooking = new Booking({ creator: req.userId, startDate, startTime, endDate, endTime, select, name: req.name, phone: req.phone, email: req.email, id, profilePicture: req.profilePicture, apartmentNo: req.apartmentNo, createdAt: new Date().toLocaleDateString('en-GB', { hour12: false })})
 
         await newBooking.save();
         res.status(201).json(newBooking);
         
-        const send_to =  'samadezee@gmail.com';
+        const send_to =  'simiremichael@gmail.com';
         const send_from = process.env.USER_EMAIL;
         const subject = 'booked succesfully';
         const message = `
